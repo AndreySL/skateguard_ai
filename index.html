@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="web/style.css">
+    <link rel="icon" type="image/x-icon" href="web/favicon.png">
+    <title>SkateGuard AI - Контроль катания на скейтборде</title>
+</head>
+
+<body>
+    <header role="banner">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo" aria-label="SkateGuard AI">SkateGuard AI</div>
+            </div>
+        </div>
+    </header>
+
+    <main role="main">
+        <div class="container">
+            <div class="dashboard">
+                <div class="input-section">
+                    <div class="controls">
+                        <label for="file-input" class="btn">Загрузить изображение</label>
+                        <label for="video-input" class="btn">Загрузить видео</label>
+                        <button id="camera-btn" class="btn">Видеопоток</button>
+                        <input type="file" id="file-input" accept="image/*" style="display: none;">
+                        <input type="file" id="video-input" accept="video/*" style="display: none;">
+                    </div>
+
+                    <div class="media-container" id="media-container">
+                        <div id="media-placeholder" class="media-placeholder">
+                            <div class="placeholder-icon">📷</div>
+                            <div class="placeholder-text">Загрузите изображение или видео</div>
+                        </div>
+                        
+                        <video id="video" autoplay muted playsinline style="display: none;"></video>
+                        <video id="video-preview" controls style="display: none;"></video>
+                        <img id="image-preview" style="display: none; max-width: 100%; border-radius: 8px;">
+                    </div>
+
+                    <div class="controls">
+                        <button id="process-btn" class="btn" disabled>🚀 Запустить анализ</button>
+                        <button id="stop-camera" class="btn btn-success" disabled>⏹ Остановить камеру</button>
+                    </div>
+                    <div class="progress-bar" id="progress-bar" style="display: none;">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                </div>
+
+                <div class="stats-section">
+                    <h3 style="text-align: center; margin-bottom: 1rem;">📊 Результаты анализа</h3>
+                    <div class="stats-grid">
+                        <div class="stat">
+                            <div class="stat-value" id="skate-count">0</div>
+                            <div class="stat-label">🛹 Скейтбордов</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value" id="person-count">0</div>
+                            <div class="stat-label">👤 Людей</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value" id="violation-count">0</div>
+                            <div class="stat-label">⚠️ Нарушений</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value" id="confidence">0%</div>
+                            <div class="stat-label">🎯 Точность</div>
+                        </div>
+                    </div>
+
+                    <div id="violation-status" style="text-align: center; margin-top: 0.5rem;"></div>
+
+                    <div id="violation-reason" class="info-card"
+                        style="display: none; background: #f8d7da; color: #721c24;">
+                        <div class="info-card-title">⚠️ Причина нарушения:</div>
+                        <span id="violation-reason-text"></span>
+                    </div>
+
+                    <div id="terrain-info" class="info-card" style="display: none;">
+                        <div class="info-card-title">🗺️ Анализ местности:</div>
+                        <div id="terrain-type-text" style="font-weight: 500; margin-bottom: 0.25rem;"></div>
+                        <div id="terrain-details" class="location-details" style="display: none;"></div>
+                        <div id="terrain-stats" style="font-size: 0.7rem; margin-top: 0.5rem; color: #b0b0b0;"></div>
+                    </div>
+
+                    <div id="video-stats" class="info-card" style="display: none;">
+                        <div class="info-card-title">🎬 Видео статистика:</div>
+                        <span id="video-stats-text"></span>
+                    </div>
+                </div>
+            </div>
+
+            <section class="history">
+                <h2>История анализов</h2>
+                <div class="controls">
+                    <button id="refresh-history" class="btn btn-info">🔄 Обновить историю</button>
+                    <button id="export-pdf" class="btn btn-info">📄 PDF отчет</button>
+                    <button id="export-excel" class="btn btn-info">📊 Excel отчет</button>
+                    <button id="clear-history" class="btn" style="background: #6c757d;">🗑 Очистить историю</button>
+                </div>
+                <div class="history-list" id="history-list">
+                    <div style="text-align: center; padding: 2rem; color: #b0b0b0;">
+                        Нет данных. Загрузите изображение или видео для анализа.
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script type="module" src="web/js/main.js"></script>
+</body>
+
+</html>
